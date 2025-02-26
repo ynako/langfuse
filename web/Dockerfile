@@ -11,13 +11,6 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 RUN corepack prepare pnpm@9.5.0 --activate
 
-FROM --platform=${TARGETPLATFORM:-linux/amd64} base AS pruner
-
-WORKDIR /app
-
-COPY . .
-RUN turbo prune --scope=web --docker
-
 FROM --platform=${TARGETPLATFORM:-linux/amd64} base AS builder
 
 WORKDIR /app
@@ -85,7 +78,7 @@ ENV NEXT_MANUAL_SIG_HANDLE true
 # set the CI flag to true to get CI specific logs
 ENV CI true
 
-RUN NODE_OPTIONS='--max-old-space-size=4096' turbo run build --filter=web...
+RUN NODE_OPTIONS='--max-old-space-size=2048' pnpm run build --filter=web...
 
 # Production image, copy all the files and run next
 FROM --platform=${TARGETPLATFORM:-linux/amd64} base AS runner
