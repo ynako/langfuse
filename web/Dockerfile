@@ -20,6 +20,7 @@
     
     # (1) package.json & pnpm-lock.yaml 먼저 복사 → install
     COPY package.json pnpm-lock.yaml ./
+    COPY patches/ ./patches/
     RUN pnpm install
     
     # (2) 나머지 모든 소스 복사
