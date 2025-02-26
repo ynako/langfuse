@@ -20,7 +20,7 @@
     
     # (1) package.json & pnpm-lock.yaml 먼저 복사 → install
     COPY package.json pnpm-lock.yaml ./
-    RUN pnpm install --frozen-lockfile
+    RUN pnpm install
     
     # (2) 나머지 모든 소스 복사
     COPY . .
@@ -49,8 +49,6 @@
     # dumb-init, tzdata 설치
     RUN apk add --no-cache dumb-init tzdata
     
-    # (선택) prisma 설치 (Migration 등 필요 시)
-    RUN npm install -g --no-package-lock --no-save prisma@6.3.0
     
     # (1) 앱 실행에 필요한 파일들만 복사
     COPY --from=builder /app/web/next.config.mjs .
