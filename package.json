@@ -34,6 +34,7 @@
     "dotenv-cli": "^7.4.4",
     "husky": "^9.1.7",
     "prettier": "^3.5.2",
+    "prisma": "^6.3.0",
     "release-it": "^18.1.2",
     "turbo": "^1.13.4"
   },
